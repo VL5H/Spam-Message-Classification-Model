@@ -1,7 +1,7 @@
 # Spam-Message-Classification-Model
 A Naive Bayes Classifier optimized to classify SMS messages as either spam or not spam.
 
-Uses a publically available, tab-separated, dataset of 5000+ spam and and non-spam messages (labelled as "spam" and "ham") for model training.
+Uses a publically available, tab-separated, dataset of 5000+ spam and non-spam messages (labelled as "spam" and "ham") for model training.
 Utilizes Python's NLTK library for data preprocessing.
 Naive Bayes logic is implemented via the collections library following the standard Bayesian inference equation:
 ```math
@@ -9,14 +9,14 @@ P(\theta |x)=\frac{P(x|\theta )P(\theta )}{P(x)}
 ```
 
 The model functions like this:
-1. Dataset is loaded from "SMSSpamCollection.txt". Messages stripped, tokenized, labelled, and randomly split 80-20 between training and testing data via the NTLK library. (Data_Loader.py)
+1. Dataset is loaded from "SMSSpamCollection.txt". Messages are stripped, tokenized, labelled, and randomly split 80-20 between training and testing data via the NLTK library. (Data_Loader.py)
 2. Training (Naive_Bayes.py):
     - The model first calculates the prior probalilites of P(ham) and P(spam) from the training data.
-    - It then computes the conditional probalbility of each word appearing in a its respective class P(word|spam) and P(word|ham) via Laplace Smoothing: $P(x_{i}|y)=\frac{\text{count}(x_{i},y)+\alpha }{\text{count}(y)+\alpha N}$  and stored in a Collections "defaultdict" subclass.
+    - It then computes the conditional probalbility of each word appearing in its respective class P(word|spam) and P(word|ham) via Laplace Smoothing: $P(x_{i}|y)=\frac{\text{count}(x_{i},y)+\alpha }{\text{count}(y)+\alpha N}$  and stored in a Collections "defaultdict" subclass.
     - Word frequencies within spam and ham messages are also tracked separately via the Collections "defaultdict" subclass.
 3. Prediction (Naive_Bayes.py):
     - Bayes theorem (see above) is applied to each message in the testing set.
-    - Log space caluclations are used to handle 0 cases.
+    - Log space calculations are used to handle 0 cases.
     - Posterior probability of Ham and Spam are calculated and compared with the greater probability becoming the final prediction.
     - Assumes all words are conditionally independent (Naive Assumption)
 4. Statistical Analysis (EvaluationMetrics.py):
@@ -43,7 +43,7 @@ Installation/SetUp:
 2. Ensure all files are in the same directory.
 
 Running/Usage Instructions:
-1. Create/activate you virtual environment (you will need Python 3.7 or higher) and run the command: ```pip install -r requirements.txt```
+1. Create/activate your virtual environment (you will need Python 3.7 or higher) and run the command: ```pip install -r requirements.txt```
 2. Open the "Main.py" file and run it.
-3. View the model's results and performance in the "results.log" file. (Should be auto-created upon first run)
-4. The model should average and accuracy of around 92% in training and 85% in testing
+3. View the model's results and performance in the "results.log" file. (Should be auto-created upon first run).
+4. The model should average an accuracy of around 92% in training and 85% in testing.
